@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="~{plantillas/plantilla :: head}">
+  <title>Vista clientes</title>
+</head>
+<body>
+<header th:replace="~{plantillas/plantilla :: header}"></header>
+
+<main class="container text-center shadow-lg bg-body-tertiary rounded">
+  <h1 th:text="${contenido}">Linganguliguliwasa linganguuuuuu linganguuuuuuu</h1>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-hover table-bordered">
+          <thead class="table-dark table-bordered">
+          <tr>
+            <th scope="col"> Nombre</th>
+            <th scope="col"> telefono</th>
+            <th scope="col"> correo</th>
+            <th scope="col"> Operaciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="ls: ${clientes}">
+            <td th:text="${ls.nombre}"></td>
+            <td th:text="${ls.telefono}"></td>
+            <td th:text="${ls.email}"></td>
+            <td>
+              <!--              <a th:href="@{/director/modificar-director/{id} (id=${ls.id})}"-->
+              <!--                 class="btn btn-success">Modificar <i class="fas fa-pen-nib"-->
+              <!--                                                      aria-hidden="true"></i> </a>-->
+              <!--              <a th:href="@{/director/eliminar-director/{id} (id=${ls.id})}"-->
+              <!--                 class="btn btn-danger">Eliminar <i class="fas fa-trash-alt"-->
+              <!--                                                    aria-hidden="true"></i> </a>-->
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer th:replace="~{plantillas/plantilla :: footer}"></footer>
+<div th:replace="~{plantillas/plantilla :: jsimports}"></div>
+
+<style>
+  body {
+    background-color: #f8d7da;
+  }
+</style>
+</body>
+</html>

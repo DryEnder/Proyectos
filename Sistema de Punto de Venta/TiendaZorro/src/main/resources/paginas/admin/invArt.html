@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="~{plantillas/plantilla :: head}">
+    <title>Inventario</title>
+</head>
+<body>
+<header th:replace="~{plantillas/plantilla :: header}"></header>
+
+<main class="container text-center shadow-lg bg-body-tertiary rounded">
+
+    <h1 th:text="${contenido}" class="my-4">Inventario asi chido asi bien solicitado</h1>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <div class="card custom-card">
+                    <form method="post" th:action="@{/admin/inventario/correo}" th:object="${item}" >
+                        <div th:if="${#fields.hasErrors('*')}" class='alert alert-danger' role="alert">
+                            Verifique los siguientes inconvenientes
+                            <ul>
+                                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+                            </ul>
+                        </div>
+                        <div class="detalle-articulo text-start">
+                            <p><strong>Nombre del artículo:</strong> <span th:text="${item.idInventario.articulo.nombre}">Ejemplo</span></p>
+                            <p><strong>Almacén:</strong> <span th:text="${item.idInventario.almacen.nombre}">Ejemplo</span></p>
+                            <p><strong>Stock actual:</strong> <span th:text="${item.stock}">Ejemplo</span></p>
+                            <p><strong>Proveedor:</strong> <span th:text="${item.idInventario.articulo.proveedor.nombre}">Ejemplo</span></p>
+                            <p><strong>Correo del proveedor:</strong> <span th:text="${item.idInventario.articulo.proveedor.email}">Ejemplo</span></p>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-6">
+                                <div class="form-floating">
+                                    <input
+                                            th:class="${#fields.hasErrors('nuevoStock')}? 'form-control is-invalid':form-control"
+                                            type="number" required
+                                            value="1"
+                                            min="1"
+                                            id="nuevoStock"
+                                            name="nuevoStock"
+                                            th:field="*{nuevoStock}">
+                                    <label for="nuevoStock">Stock Solicitado</label>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center my-4">
+                            <button type="submit" class="btn btn-guardar">
+                                <i class="fa fa-paper-plane"></i> Solicitar Stock
+                            </button>
+                        </div>
+                        <input type="hidden" name="idInventario.articulo.nombre" th:value="${item.idInventario.articulo.nombre}"/>
+                        <input type="hidden" name="idInventario.articulo.proveedor.nombre" th:value="${item.idInventario.articulo.proveedor.nombre}"/>
+
+                        <input type="hidden" name="idInventario.articulo.proveedor.email" th:value="${item.idInventario.articulo.proveedor.email}"/>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{plantillas/plantilla :: footer}"></footer>
+<div th:replace="~{plantillas/plantilla :: jsimports}"></div>
+</body>
+<style>
+    body {
+        background-color: #f8d7da;
+    }
+    .custom-card {
+        background-color: #f5c2c7;
+        border: 1px solid #f5c2c7;
+    }
+    .detalle-articulo p {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
+    .btn-guardar {
+        background-color: #348f8f;
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        font-size: 1.1rem;
+        border-radius: 6px;
+    }
+
+    .btn-guardar:hover {
+        background-color: #2c7777;
+        color: white;
+    }
+</style>
+</html>

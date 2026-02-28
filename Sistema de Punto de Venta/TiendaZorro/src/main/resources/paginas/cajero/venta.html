@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="es">
+<head th:replace="~{plantillas/plantilla :: head}">
+    <title>Vista de la tienda</title>
+</head>
+<body>
+<header th:replace="~{plantillas/plantilla :: header}"></header>
+
+<main class="container text-center shadow-lg bg-body-tertiary rounded">
+    <div></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 th:text="'Hola, ' + ${#strings.defaultString(ventaa.cliente?.nombre, 'cliente anónimo')}" class="my-4">
+                    Bienvenido
+                </h3>
+
+                <form method="get" action="/cajero/buscar-cliente" class="form-inline">
+                    <input type="hidden" name="ventaId" th:value="${ventaa.id}" />
+                    <input type="text" name="busqueda" required placeholder="Teléfono o correo" class="form-control mr-2" />
+                    <button type="submit" class="btn btn-light mr-2">Buscar Cliente</button>
+                    <div class="ml-auto">
+                        <a th:href="@{/cajero/crear-cliente/{id}(id=${ventaa.id})}" class="btn btn-success">Crear Cliente</a>
+                    </div>
+                </form>
+                <div th:if="${error}" class="alert-danger" th:text="${error}"></div>
+                <div class="row">
+                    <div class="col-md-8 my-4">
+                        <h3>
+                            Productos del inventario
+                        </h3>
+                        <table class="table">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col"> Articulo</th>
+                                <th scope="col"> Código</th>
+                                <th scope="col"> Stock</th>
+                                <th scope="col"> Cantidad</th>
+                                <th scope="col"> Agregar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr th:each="ls: ${inventario}">
+                                <form th:action="@{/cajero/agregar-producto}" method="post">
+                                    <td th:text="${ls.idInventario.articulo.nombre}"></td>
+                                    <td th:text="${ls.idInventario.articulo.codigo}"></td>
+                                    <td th:text="${ls.stock}"></td>
+
+                                    <td><input type="number" name="cantidad" min="1" value="1" required /></td>
+                                    <td>
+                                        <input type="hidden" name="idVenta" th:value="${ventaa.id}" />
+                                        <input type="hidden" name="idArticulo" th:value="${ls.idInventario.articulo.id}" />
+                                        <input type="hidden" name="precio" th:value="${ls.idInventario.articulo.precioVenta}" />
+                                        <button type="submit" class="btn btn-success">Agregar</button>
+
+                                    </td>
+                                </form>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="col-md-4 my-4">
+                        <h3>
+                            Productos agregados
+                        </h3>
+                        <table th:if="${!detalle.isEmpty()}" class="table">
+                            <thead class="table-dark">
+                            <tr>
+                                <th scope="col"> Articulo</th>
+                                <th scope="col"> Cantidad</th>
+                                <th scope="col"> precio</th>
+
+                                <th scope="col"> Eliminar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="ls: ${detalle}">
+                                <form th:action="@{/cajero/eliminar-producto}" method="post">
+                                    <td th:text="${ls.articulo.nombre}"></td>
+                                    <td th:text="${ls.cantidad}"></td>
+                                    <td th:text="${ls.precio}"></td>
+                                    <td>
+                                        <input type="hidden" name="idVenta" th:value="${ventaa.id}" />
+                                        <input type="hidden" name="detalle" th:value="${ls.id}" />
+                                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                                    </td>
+                                </form>
+                            </tr>
+                            </tbody>
+
+                        </table>
+                        <h3 class="text-info" th:text="${'Total: $' + ventaa.total}">Total</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <a th:if="${!detalle.isEmpty()}"
+                           th:href="@{/cajero/guardar-transaccion/{id} (id=${ventaa.id})}"
+                           class="btn btn-success" id="gdt"
+                           onclick="this.classList.add('disabled'); this.removeAttribute('onclick'); return true;">
+                            Guardar Transacción <i class="fas fa-pen-nib" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
+                        <a th:href="@{/cajero/destruir-transaccion/{id} (id=${ventaa.id})}"
+                           class="btn btn-danger">Eliminar<i class="fas fa-pen-nib"
+                                                             aria-hidden="true"></i> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<footer th:replace="~{plantillas/plantilla :: footer}"></footer>
+<div th:replace="~{plantillas/plantilla :: jsimports}"></div>
+</body>
+
+<style>
+    body {
+        background-color: #f8d7da;
+    }
+</style>
+</html>

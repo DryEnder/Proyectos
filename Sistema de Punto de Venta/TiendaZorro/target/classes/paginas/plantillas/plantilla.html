@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Tienda zorro</title>
+
+  <link rel="icon" href="https://upload-os-bbs.hoyolab.com/upload/2024/11/03/386235926/85ab626eb3c48b5a035a997281393696_182971019880086471.png">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/css/sticky-footer-navbar.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+<header th:fragment="header">
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md fixed-top bg-danger">
+    <a class="navbar-brand" href="#">
+      <img src="/image/zorro.png" alt="Logo" width="80" height="40" class="d-inline-block align-text-top">
+    </a>
+
+    <!-- Botón para dispositivos móviles -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <span class="navbar-text mr-4"><strong>Tienda Zorro</strong></span>
+        </li>
+        <li class="nav-item">
+          <span class="navbar-text ml-4 font-italic font-weight-light">
+            <span th:text="${nombre}">Bienvenido</span>
+          </span>
+        </li>
+      </ul>
+      <a class="btn btn-salir text-white" th:href="@{/logout}" role="button">
+        <i class="fa fa-sign-out"></i> Salir
+      </a>
+    </div>
+  </nav>
+</header>
+
+<!-- Begin page content -->
+<main class="container text-center shadow-lg rounded">
+  <h1>Hecho con mucho esfuerzo y dedicación para el Mike</h1>
+
+  <img th:src="@{/image/crudo.png}" height="100" width="240"/>
+  <p>Puedes hacer cualquier operación en la base de datos. Haz clic en cualquier entidad de la barra de navegación
+    para poder Crear, Modificar, Revisar y Borrar los registros.
+  </p>
+
+  <img th:src="@{/image/refe.png}" height="258" width="240"/>
+  <br>
+
+  <p>Ve al apartado de Generar Referencias, para poder obtener la referencia a un recurso de tu preferencia.<br>
+    Es posible generar referencias conforme a lo estipulado en las normas
+    <a href="https://www.apa.org/">APA 7ma edición</a>, o del
+    <a href="https://www.ieee.org/">Instituto de Ingenieros Eléctricos y Electrónicos (IEEE)</a>.
+  </p>
+
+  <br>
+  <h4>¡Comienza ahora a consultar tus recursos!</h4>
+</main>
+
+<footer class="footer bg-dark text-white mt-5 py-3" th:fragment="footer">
+  <div class="container text-center">
+    <span>© 2025 Tienda Zorro. Todos los derechos reservados.</span>
+  </div>
+</footer>
+
+<div th:fragment="jsimports">
+  <script src="/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="/js/popper.bundle.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+</div>
+
+<!-- Estilos personalizados -->
+<style>
+  body {
+    background-color: #f8d7da;
+  }
+
+  .btn-salir {
+    background-color: #7b2e3e !important;
+    color: white !important;
+    border: none;
+  }
+
+  .btn-salir:hover {
+    background-color: #622430 !important;
+    color: white !important;
+  }
+
+  main {
+    margin-top: 80px; /* Separación del navbar fijo */
+  }
+</style>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+package mx.unam.aragon.model.entity;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
+
+@Entity(name = "rol")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class RolEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idrol")
+    private Long id;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @Column(name = "descripcion")
+    private String descripcion;
+
+
+//    @OneToMany(mappedBy = "rol")
+//    private List<UsuarioEntity> usuarios;
+
+
+
+}
