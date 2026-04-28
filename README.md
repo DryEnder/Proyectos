@@ -39,7 +39,7 @@ Cuento con experiencia en la **Suprema Corte de Justicia de la Nación (SCJN)** 
 ## 📫 Contacto
 * **Correo:** luisgemelo2003@gmail.com
 * **GitHub:** [DryEnder](https://github.com/DryEnder/)
-* **Ubicación:** Santa Anita, Ciudad de Mexico
+* **Ubicación:** Ciudad de Mexico
 
 ---
 *Este repositorio es parte de mi formación continua en la Facultad de Estudios Superiores Aragón (2022-2026).*
